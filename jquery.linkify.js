@@ -1,3 +1,8 @@
+/**
+ * Custom(ized) jQuery plugin for Comcast Silicon Valley
+ *
+ * 
+ */
 function linkify(string, buildHashtagUrl, options) {
   var urlRegEx = /(?:(https?|ftps?|file):\/\/)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(?:\/?[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
   var emailRegEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$/i;
