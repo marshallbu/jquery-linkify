@@ -1,7 +1,8 @@
 /**
  * Custom(ized) jQuery plugin for Comcast Silicon Valley
  *
- * 
+ * https://github.com/marshallbu/jquery-linkify
+ *
  */
 function linkify(string, buildHashtagUrl, options) {
   var urlRegEx = /(?:(https?|ftps?|file):\/\/)?[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(?:\/?[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
