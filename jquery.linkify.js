@@ -1,20 +1,30 @@
 function linkify(string, buildHashtagUrl, includeW3, target) {
-  string = string.replace(/((http|https|ftp)\:\/\/|\bw{3}\.)[a-z0-9\-\.]+\.[a-z]{2,3}(:[a-z0-9]*)?\/?([a-z0-9\-\._\?\,\'\/\\\+&amp;%\$#\=~])*/gi, function(captured) {
+  var urlRegEx = /([-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(?:\/?[-a-zA-Z0-9@:%_\+.~#?&//=]*)?)/gi;
+  var emailRegEx = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})$/i;
+
+  string = string.replace(urlRegEx, function(captured) {
     var uri;
-    if (captured.toLowerCase().indexOf("www.") == 0) {
+    console.log(captured);
+    if (emailRegEx.test(captured)) {
+      //if captured string is an email, use mailto protocol
+      uri = 'mailto:' + captured;
+    }
+    else if (captured.toLowerCase().indexOf('www.') === 0) {
       if (!includeW3) {
         return captured;
       }
-      uri = "http://" + captured;
+      uri = 'http://' + captured;
     } else {
       uri = captured;
     }
-    return "<a href=\"" + uri+ "\" target=\"" + target + "\">" + captured + "</a>";;
+
+    return '<a href="' + uri + '" target="' + target + '">' + captured + '</a>';
   });
   
   if (buildHashtagUrl) {
-    string = string.replace(/\B#(\w+)/g, "<a href=" + buildHashtagUrl("$1") +" target=\"" + target + "\">#$1</a>");
+    string = string.replace(/\B#(\w+)/g, '<a href="' + buildHashtagUrl('$1') + '" target="' + target + '">#$1</a>');
   }
+
   return string;
 }
 
@@ -25,6 +35,7 @@ function linkify(string, buildHashtagUrl, includeW3, target) {
       var buildHashtagUrl;
       var includeW3 = true;
       var target = '_self';
+
       if (opts) {
         if (typeof opts  == "function") {
           buildHashtagUrl = opts;
@@ -40,7 +51,9 @@ function linkify(string, buildHashtagUrl, includeW3, target) {
           }
         }
       }
+
       $this.html(linkify($this.html(), buildHashtagUrl, includeW3, target));
     });
-  }
+  };
+
 })(jQuery);
