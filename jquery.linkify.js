@@ -16,7 +16,7 @@ function linkify(string, buildHashtagUrl, options) {
       }
       uri = options.defaultProtocol + captured;
     }
-    else if (options.alwaysIncludeProtocol && p1 !== '') {
+    else if (options.alwaysIncludeProtocol && p1 === '') {
       //make sure it doesn't exist already by checking for an empty string in 
       //the passed in p1 capture group from our regex
       //if it doesn't default to
