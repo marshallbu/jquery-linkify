@@ -4,7 +4,7 @@ function linkify(string, buildHashtagUrl, includeW3, target) {
 
   string = string.replace(urlRegEx, function(captured) {
     var uri;
-    console.log(captured);
+
     if (emailRegEx.test(captured)) {
       //if captured string is an email, use mailto protocol
       uri = 'mailto:' + captured;
@@ -20,7 +20,7 @@ function linkify(string, buildHashtagUrl, includeW3, target) {
 
     return '<a href="' + uri + '" target="' + target + '">' + captured + '</a>';
   });
-  
+
   if (buildHashtagUrl) {
     string = string.replace(/\B#(\w+)/g, '<a href="' + buildHashtagUrl('$1') + '" target="' + target + '">#$1</a>');
   }
@@ -37,16 +37,16 @@ function linkify(string, buildHashtagUrl, includeW3, target) {
       var target = '_self';
 
       if (opts) {
-        if (typeof opts  == "function") {
+        if (typeof opts  === "function") {
           buildHashtagUrl = opts;
         } else {
-          if (typeof opts.hashtagUrlBuilder == "function") {
+          if (typeof opts.hashtagUrlBuilder === "function") {
             buildHashtagUrl = opts.hashtagUrlBuilder;
           }
-          if (typeof opts.includeW3 == "boolean") {
+          if (typeof opts.includeW3 === "boolean") {
             includeW3 = opts.includeW3;
           }
-          if (typeof opts.target == "string") {
+          if (typeof opts.target === "string") {
             target = opts.target;
           }
         }
